@@ -1,6 +1,12 @@
 import java.awt.*;
 
-public class Volvo240{
+public class Volvo240 extends TrimmedCar{
+    public Volvo240(){
+        super(4, 100, Color.black, "Volvo240", 1.25);
+    }
+}
+
+/* public class Volvo240{
 
     public final static double trimFactor = 1.25;
     public int nrDoors; // Number of doors on the car
@@ -66,3 +72,4 @@ public class Volvo240{
         decrementSpeed(amount);
     }
 }
+ */

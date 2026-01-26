@@ -1,6 +1,12 @@
 import java.awt.*;
 
-public class Saab95{
+public class Saab95 extends TurboCar{
+    public Saab95(){
+        super(2, 125, Color.red, "Saab95");
+    }
+}
+
+/* public class Saab95{
 
     public boolean turboOn;
     public int nrDoors; // Number of doors on the car
@@ -77,3 +83,4 @@ public class Saab95{
         decrementSpeed(amount);
     }
 }
+ */

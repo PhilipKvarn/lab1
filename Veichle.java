@@ -54,9 +54,51 @@ public class Veichle {
 
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+    }   
+}
+
+
+class TurboCar extends Veichle{
+    
+    private boolean activeTurbo;
+    
+    public TurboCar(int nrDoors, double enginePower, Color color, String modelName){
+        super(nrDoors, enginePower, color, modelName);
+    }
+
+    public boolean getTurboActive(){
+        return activeTurbo;
+    }
+
+    public void setTurboActive(){
+        activeTurbo = true;
+    }
+
+    public void setTurboInactive(){
+        activeTurbo = false;
     }
 
 
+    @Override
+    public double speedFactor(){
+        double turbo = 1.0;
+        if(activeTurbo){turbo = 1.3;}
+        return enginePower * 0.01 * turbo ;
+    }
 
+}
+
+class TrimmedCar extends Veichle{
+    private double trimFactor;
+
+    public TrimmedCar(int nrDoors, double enginePower, Color color, String modelName, double trimFactor){
+        super(nrDoors, enginePower, color, modelName);
+        this.trimFactor = trimFactor;
+    }
+
+    @Override
+    public double speedFactor(){
+        return enginePower * 0.01 * trimFactor;
+    }
 
 }

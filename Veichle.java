@@ -7,7 +7,7 @@ public class Veichle implements Movable{
     private Color color;
     private String modelName;
 
-    private double[] veichlePosition = {0,0};
+    private Vector2 veichlePosition = new Vector2(0.0, 0.0);
     private Vector2 veichleDirection = new Vector2(1.0, 0.0);
     private int rotationSpeed = 10; // rotation of 10degrees per rotation
 
@@ -62,22 +62,24 @@ public class Veichle implements Movable{
     @Override
     public void move(){
         if (currentSpeed <= 0) {
-            veichlePosition[0] += getCurrentSpeed() * veichleDirection.x;
-            veichlePosition[1] += getCurrentSpeed() * veichleDirection.y;
+            veichlePosition.add(
+                getCurrentSpeed() * veichleDirection.x,
+                getCurrentSpeed() * veichleDirection.y
+            );
         }
     }
 
     @Override
     public void turnLeft(){
-        veichleDirection.rotateByDeg(-10);
+        veichleDirection.rotateByDeg(-rotationSpeed);
     }
 
     @Override
     public void turnRight(){
-        veichleDirection.rotateByDeg(10);
+        veichleDirection.rotateByDeg(rotationSpeed);
     }
 
-    public double[] getPosition(){
+    public Vector2 getPosition(){
         return veichlePosition;
     }
 

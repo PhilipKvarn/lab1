@@ -7,6 +7,10 @@ public class Vector2 {
         this.y = y;
     }
 
+    static public Vector2 zero(){
+        return new Vector2(0, 0);
+    }
+
     public void add(double x, double y){
         this.x += x;
         this.y += y;

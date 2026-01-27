@@ -1,12 +1,16 @@
 import java.awt.*;
-
-public class Veichle {
+import java.math.*;
+public class Veichle implements Movable{
     
     protected int nrDoors;
     protected double enginePower;
     protected double currentSpeed;
     protected Color color;
     public String modelName;
+
+    private double[] veichlePosition = {0,0};
+    private double[] veichleDirection = {1,0};
+    private int rotationSpeed = 10; // rotation of 10degrees per rotation
 
     public Veichle(int nrDoors, double enginePower, Color color, String modelName){
         this.nrDoors = nrDoors;
@@ -44,7 +48,7 @@ public class Veichle {
         currentSpeed = 0;
     }
 
-    public double speedFactor(){
+    protected double speedFactor(){
         return enginePower*0.01;
     }
 
@@ -55,6 +59,32 @@ public class Veichle {
     public void decrementSpeed(double amount){
         currentSpeed = getCurrentSpeed() - speedFactor() * amount;
     }   
+
+    @Override
+    public void move(){
+        if (currentSpeed <= 0) {
+            veichlePosition[0] += getCurrentSpeed() * veichleDirection[0];
+            veichlePosition[1] += getCurrentSpeed() * veichleDirection[1];
+        }
+    }
+
+    @Override
+    public void turnLeft(){
+        double radianRotation = rotationSpeed * (Math.PI/180);
+        double xPos = Math.acos(veichleDirection[0]);
+        veichleDirection[0] = Math.cos(xPos+radianRotation);
+        double yPos = Math.asin(veichleDirection[1]);
+        veichleDirection[1] = Math.sin(yPos+radianRotation); 
+    }
+
+    @Override
+    public void turnRight(){
+        double radianRotation = rotationSpeed * (Math.PI/180);
+        double xPos = Math.acos(veichleDirection[0]);
+        veichleDirection[0] = Math.cos(xPos-radianRotation);
+        double yPos = Math.asin(veichleDirection[1]);
+        veichleDirection[1] = Math.sin(yPos-radianRotation);
+    }
 }
 
 
@@ -81,7 +111,7 @@ class TurboCar extends Veichle{
 
 
     @Override
-    public double speedFactor(){
+    protected double speedFactor(){
         double turbo = 1.0;
         if(activeTurbo){turbo = 1.3;}
         return enginePower * 0.01 * turbo ;
@@ -98,7 +128,7 @@ class TrimmedCar extends Veichle{
     }
 
     @Override
-    public double speedFactor(){
+    protected double speedFactor(){
         return enginePower * 0.01 * trimFactor;
     }
 

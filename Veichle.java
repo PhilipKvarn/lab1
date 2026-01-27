@@ -22,6 +22,10 @@ public class Veichle implements Movable{
     public int getNrDoors(){
         return nrDoors;
     }
+    
+    public String getModelName(){
+        return modelName;
+    }
 
     public double getEnginePower(){
         return enginePower;

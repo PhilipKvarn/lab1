@@ -8,7 +8,7 @@ public class Veichle implements Movable{
     private String modelName;
 
     private double[] veichlePosition = {0,0};
-    private double[] veichleDirection = {1,0};
+    private Vector2 veichleDirection = new Vector2(1.0, 0.0);
     private int rotationSpeed = 10; // rotation of 10degrees per rotation
 
     public Veichle(int nrDoors, double enginePower, Color color, String modelName){
@@ -62,23 +62,27 @@ public class Veichle implements Movable{
     @Override
     public void move(){
         if (currentSpeed <= 0) {
-            veichlePosition[0] += getCurrentSpeed() * veichleDirection[0];
-            veichlePosition[1] += getCurrentSpeed() * veichleDirection[1];
+            veichlePosition[0] += getCurrentSpeed() * veichleDirection.x;
+            veichlePosition[1] += getCurrentSpeed() * veichleDirection.y;
         }
     }
 
     @Override
     public void turnLeft(){
-        double radianRotation = -rotationSpeed * (Math.PI/180);
-        veichleDirection[0] = veichleDirection[0] * Math.cos(radianRotation) - veichleDirection[1] *Math.sin(radianRotation);
-        veichleDirection[1] = veichleDirection[0] * Math.sin(radianRotation) + veichleDirection[1] *Math.cos(radianRotation);
+        veichleDirection.rotateByDeg(-10);
     }
 
     @Override
     public void turnRight(){
-        double radianRotation = rotationSpeed * (Math.PI/180);
-        veichleDirection[0] = veichleDirection[0] * Math.cos(radianRotation) - veichleDirection[1] *Math.sin(radianRotation);
-        veichleDirection[1] = veichleDirection[0] * Math.sin(radianRotation) + veichleDirection[1] *Math.cos(radianRotation);
+        veichleDirection.rotateByDeg(10);
+    }
+
+    public double[] getPosition(){
+        return veichlePosition;
+    }
+
+    public Vector2 getDirection(){
+        return veichleDirection;
     }
 }
 

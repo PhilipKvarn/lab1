@@ -1,12 +1,11 @@
 import java.awt.*;
-import java.math.*;
 public class Veichle implements Movable{
     
-    protected int nrDoors;
+    private int nrDoors;
     protected double enginePower;
-    protected double currentSpeed;
-    protected Color color;
-    public String modelName;
+    private double currentSpeed;
+    private Color color;
+    private String modelName;
 
     private double[] veichlePosition = {0,0};
     private double[] veichleDirection = {1,0};
@@ -53,11 +52,11 @@ public class Veichle implements Movable{
     }
 
     public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
     public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }   
 
     @Override
@@ -70,20 +69,16 @@ public class Veichle implements Movable{
 
     @Override
     public void turnLeft(){
-        double radianRotation = rotationSpeed * (Math.PI/180);
-        double xPos = Math.acos(veichleDirection[0]);
-        veichleDirection[0] = Math.cos(xPos+radianRotation);
-        double yPos = Math.asin(veichleDirection[1]);
-        veichleDirection[1] = Math.sin(yPos+radianRotation); 
+        double radianRotation = -rotationSpeed * (Math.PI/180);
+        veichleDirection[0] = veichleDirection[0] * Math.cos(radianRotation) - veichleDirection[1] *Math.sin(radianRotation);
+        veichleDirection[1] = veichleDirection[0] * Math.sin(radianRotation) + veichleDirection[1] *Math.cos(radianRotation);
     }
 
     @Override
     public void turnRight(){
         double radianRotation = rotationSpeed * (Math.PI/180);
-        double xPos = Math.acos(veichleDirection[0]);
-        veichleDirection[0] = Math.cos(xPos-radianRotation);
-        double yPos = Math.asin(veichleDirection[1]);
-        veichleDirection[1] = Math.sin(yPos-radianRotation);
+        veichleDirection[0] = veichleDirection[0] * Math.cos(radianRotation) - veichleDirection[1] *Math.sin(radianRotation);
+        veichleDirection[1] = veichleDirection[0] * Math.sin(radianRotation) + veichleDirection[1] *Math.cos(radianRotation);
     }
 }
 

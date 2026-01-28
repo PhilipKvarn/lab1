@@ -1,8 +1,24 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
 
 public class VeichleTest {
+
+    @Test
+    public void testSaab() {
+        Veichle s = new Saab95();
+        assertEquals("125", s.getEnginePower());
+        assertEquals(2, s.getNrDoors());
+        assertEquals("red", s.getColor());
+        s.currentSpeed = 2;
+        double speed = s.currentSpeed;
+        s.decrementSpeed(1);
+        assertTrue(speed > s.currentSpeed);
+        speed = s.currentSpeed;
+        s.incrementSpeed(1);
+        assertTrue(speed < s.currentSpeed);
+    }
 
     @Test
     public void accelerateTest(){

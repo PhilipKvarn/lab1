@@ -1,15 +1,14 @@
 import java.awt.*;
-import java.math.*;
 public class Veichle implements Movable{
     
-    protected int nrDoors;
+    private int nrDoors;
     protected double enginePower;
-    protected double currentSpeed;
-    protected Color color;
-    public String modelName;
+    private double currentSpeed;
+    private Color color;
+    private String modelName;
 
-    private double[] veichlePosition = {0,0};
-    private double[] veichleDirection = {1,0};
+    private Vector2 veichlePosition = new Vector2(0.0, 0.0);
+    private Vector2 veichleDirection = new Vector2(1.0, 0.0);
     private int rotationSpeed = 10; // rotation of 10degrees per rotation
 
     public Veichle(int nrDoors, double enginePower, Color color, String modelName){
@@ -22,6 +21,10 @@ public class Veichle implements Movable{
 
     public int getNrDoors(){
         return nrDoors;
+    }
+    
+    public String getModelName(){
+        return modelName;
     }
 
     public double getEnginePower(){
@@ -53,37 +56,39 @@ public class Veichle implements Movable{
     }
 
     public void incrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() + speedFactor() * amount;
+        currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount,enginePower);
     }
 
     public void decrementSpeed(double amount){
-        currentSpeed = getCurrentSpeed() - speedFactor() * amount;
+        currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount,0);
     }   
 
     @Override
     public void move(){
-        if (currentSpeed <= 0) {
-            veichlePosition[0] += getCurrentSpeed() * veichleDirection[0];
-            veichlePosition[1] += getCurrentSpeed() * veichleDirection[1];
+        if (currentSpeed > 0.0) {
+            veichlePosition.add(
+                getCurrentSpeed() * veichleDirection.x,
+                getCurrentSpeed() * veichleDirection.y
+            );
         }
     }
 
     @Override
     public void turnLeft(){
-        double radianRotation = rotationSpeed * (Math.PI/180);
-        double xPos = Math.acos(veichleDirection[0]);
-        veichleDirection[0] = Math.cos(xPos+radianRotation);
-        double yPos = Math.asin(veichleDirection[1]);
-        veichleDirection[1] = Math.sin(yPos+radianRotation); 
+        veichleDirection.rotateByDeg(-rotationSpeed);
     }
 
     @Override
     public void turnRight(){
-        double radianRotation = rotationSpeed * (Math.PI/180);
-        double xPos = Math.acos(veichleDirection[0]);
-        veichleDirection[0] = Math.cos(xPos-radianRotation);
-        double yPos = Math.asin(veichleDirection[1]);
-        veichleDirection[1] = Math.sin(yPos-radianRotation);
+        veichleDirection.rotateByDeg(rotationSpeed);
+    }
+
+    public Vector2 getPosition(){
+        return veichlePosition;
+    }
+
+    public Vector2 getDirection(){
+        return veichleDirection;
     }
 }
 

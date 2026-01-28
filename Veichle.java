@@ -65,7 +65,7 @@ public class Veichle implements Movable{
 
     @Override
     public void move(){
-        if (currentSpeed <= 0) {
+        if (currentSpeed > 0.0) {
             veichlePosition.add(
                 getCurrentSpeed() * veichleDirection.x,
                 getCurrentSpeed() * veichleDirection.y

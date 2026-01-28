@@ -11,6 +11,19 @@ public class VeichleTest {
         Vector2 zeroVector = new Vector2(0, 0);
         assertEquals(pos.x,zeroVector.x);
         assertEquals(pos.y,zeroVector.y);
+        saab95.startEngine();
+        assertEquals(saab95.getCurrentSpeed(), 0.1);
+        saab95.move();
+        assertEquals(pos.x,0.1);
+        assertEquals(pos.y,zeroVector.y);
+        saab95.incrementSpeed(10); // 0.1 +  1.25*10 = 12.6
+        assertEquals(saab95.getCurrentSpeed(), 12.6);
+        saab95.move();
+        assertEquals(pos.x, 12.7);
+        saab95.decrementSpeed(6.08); // 12.6 - 1.25*6.08 = 5 
+        assertEquals(saab95.getCurrentSpeed(), 5);
+        saab95.move();
+        assertEquals(pos.x, 17.7);
     }
 
     @Test

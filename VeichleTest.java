@@ -51,6 +51,13 @@ public class VeichleTest {
         double y = Math.round(dir.y*1000.0)/1000.0;
         assertEquals(0.985, x);
         assertEquals(-0.174, y);
+        saab95.turnRight();
+        saab95.turnRight();
+        dir = saab95.getDirection();
+        x = Math.round(dir.x*1000.0)/1000.0;
+        y = Math.round(dir.y*1000.0)/1000.0;
+        assertEquals(0.985, x);
+        assertEquals(0.174, y);
     }
 
 }

@@ -11,7 +11,6 @@ public class VeichleTest {
         assertEquals("125", s.getEnginePower());
         assertEquals(2, s.getNrDoors());
         assertEquals("red", s.getColor());
-        s.startEngine();
         s.incrementSpeed(2);
         double speed = s.getCurrentSpeed();
         s.decrementSpeed(1);

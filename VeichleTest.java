@@ -22,12 +22,12 @@ public class VeichleTest {
         assertEquals("125", s.getEnginePower());
         assertEquals(2, s.getNrDoors());
         assertEquals("red", s.getColor());
-        s.incrementSpeed(2);
+        s.gas(2);
         double speed = s.getCurrentSpeed();
-        s.decrementSpeed(1);
+        s.gas(1);
         assertTrue(speed > s.getCurrentSpeed());
         speed = s.getCurrentSpeed();
-        s.incrementSpeed(1);
+        s.gas(1);
         assertTrue(speed < s.getCurrentSpeed());
     }
 
@@ -43,11 +43,11 @@ public class VeichleTest {
         saab95.move();
         assertEquals(pos.x, 0.1);
         assertEquals(pos.y, zeroVector.y);
-        saab95.incrementSpeed(10); // 0.1 + 1.25*10 = 12.6
+        saab95.gas(10); // 0.1 + 1.25*10 = 12.6
         assertEquals(saab95.getCurrentSpeed(), 12.6);
         saab95.move();
         assertEquals(pos.x, 12.7);
-        saab95.decrementSpeed(6.08); // 12.6 - 1.25*6.08 = 5
+        saab95.gas(6.08); // 12.6 - 1.25*6.08 = 5
         assertEquals(saab95.getCurrentSpeed(), 5);
         saab95.move();
         assertEquals(pos.x, 17.7);
@@ -84,13 +84,37 @@ public class VeichleTest {
         trim.startEngine();
         normalCar.startEngine();
 
-        trim.incrementSpeed(10);      // 0.1 + 1.25*10 = 12.6
-        normalCar.incrementSpeed(10); // 0.1 + 1*10 = 10.1
+        trim.gas(10);      // 0.1 + 1.25*10 = 12.6
+        normalCar.gas(10); // 0.1 + 1*10 = 10.1
 
         assertNotEquals(trim.getCurrentSpeed(), normalCar.getCurrentSpeed());
 
         // Assert Not Equal mellan bilarnas hastighet.
         // Efter att de har accelererat med en magnitud av 10.
+    }
+
+    @Test
+    public void ensureGas(){
+        Veichle normalCar = new Veichle(2, 100,Color.red,"ABC123");
+        normalCar.startEngine(); // speed --> 0.1
+        normalCar.gas(-10);      // speed --> 0.1
+        normalCar.gas(1); // speed --> 1.1
+        assertEquals(1.1, normalCar.getCurrentSpeed());
+        normalCar.gas(100); // speed --> 1.1
+        normalCar.gas(1);   // speed --> 2.1
+        assertEquals(2.1, normalCar.getCurrentSpeed());
+    }
+
+    @Test
+    public void ensureBrake(){
+        Veichle normalCar = new Veichle(2, 100,Color.red,"ABC123");
+        normalCar.startEngine();
+        normalCar.gas(1); // speed --> 1.1
+        normalCar.gas(1); // speed --> 2.2
+        normalCar.brake(-5);     // speed --> 2.2
+        normalCar.brake(100); // speed --> 2.2
+        normalCar.brake(1);   // speed --> 1.1
+        assertEquals(1.1, normalCar.getCurrentSpeed());
     }
 
 }

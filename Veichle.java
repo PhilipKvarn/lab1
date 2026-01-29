@@ -126,7 +126,6 @@ public class Veichle implements Movable {
     public void brake(double amount) {
         boolean check = checkSpeedChange(amount);
         if (check) {
-
             decrementSpeed(amount);
         }
     }
@@ -145,7 +144,7 @@ public class Veichle implements Movable {
 
     private boolean checkSpeedChange(double amount) {
         boolean check = false;
-        if (amount <= 1 || amount >= 0) {
+        if (amount <= 1 && amount >= 0) {
             check = true;
         }
         return check;

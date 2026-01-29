@@ -9,12 +9,13 @@ import org.junit.Test;
 public class VeichleTest {
 
     /*
-    Veichle myVeichle;
-    @BeforeAll
-    public void setUp(){
-        myVeichle = new Veichle(0, 0, null, null);
-    }
-    */
+     * Veichle myVeichle;
+     * 
+     * @BeforeAll
+     * public void setUp(){
+     * myVeichle = new Veichle(0, 0, null, null);
+     * }
+     */
 
     @Test
     public void testSaab() {
@@ -22,12 +23,12 @@ public class VeichleTest {
         assertEquals("125", s.getEnginePower());
         assertEquals(2, s.getNrDoors());
         assertEquals("red", s.getColor());
-        s.incrementSpeed(2);
+        s.gas(1);
         double speed = s.getCurrentSpeed();
-        s.decrementSpeed(1);
+        s.brake(1);
         assertTrue(speed > s.getCurrentSpeed());
         speed = s.getCurrentSpeed();
-        s.incrementSpeed(1);
+        s.gas(1);
         assertTrue(speed < s.getCurrentSpeed());
     }
 
@@ -43,12 +44,12 @@ public class VeichleTest {
         saab95.move();
         assertEquals(pos.x, 0.1);
         assertEquals(pos.y, zeroVector.y);
-        saab95.incrementSpeed(10); // 0.1 + 1.25*10 = 12.6
-        assertEquals(saab95.getCurrentSpeed(), 12.6);
+        saab95.gas(1); // 0.1 + 1.25*1 = 1.35
+        assertEquals(saab95.getCurrentSpeed(), 1.35);
         saab95.move();
-        assertEquals(pos.x, 12.7);
-        saab95.decrementSpeed(6.08); // 12.6 - 1.25*6.08 = 5
-        assertEquals(saab95.getCurrentSpeed(), 5);
+        assertEquals(pos.x, 1.35);
+        saab95.brake(1); // 1.35 - 1.25*1 = 0.1
+        assertEquals(saab95.getCurrentSpeed(), 0.1);
         saab95.move();
         assertEquals(pos.x, 17.7);
     }
@@ -72,20 +73,20 @@ public class VeichleTest {
     }
 
     @Test
-    public void activateTurbo(){
-        
+    public void activateTurbo() {
+
     }
 
     @Test
-    public void compareTrim(){
+    public void compareTrim() {
         TrimmedCar trim = new Volvo240();
         Veichle normalCar = new Veichle(2, 100, Color.red, "ABC123");
 
         trim.startEngine();
         normalCar.startEngine();
 
-        trim.incrementSpeed(10);      // 0.1 + 1.25*10 = 12.6
-        normalCar.incrementSpeed(10); // 0.1 + 1*10 = 10.1
+        trim.gas(1); // 0.1 + 1.25*1 = 1,35
+        normalCar.gas(1); // 0.1 + 1*1 = 1.1
 
         assertNotEquals(trim.getCurrentSpeed(), normalCar.getCurrentSpeed());
 

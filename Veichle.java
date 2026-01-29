@@ -99,7 +99,7 @@ public class Veichle implements Movable {
     }
 
     /**
-     * cheks so that the value is ok before increaseing speed
+     * cheks so that the speedchange is alowed before increasing the speed
      * 
      * @param amount double parametre to increase the speed
      */
@@ -123,6 +123,11 @@ public class Veichle implements Movable {
         }
     }
 
+    /**
+     * cheks so that the speedchange is alowed before decreaseing the speed
+     * 
+     * @param amount double parameter to decrease the speed
+     */
     public void brake(double amount) {
         boolean check = checkSpeedChange(amount);
         if (check) {
@@ -142,6 +147,12 @@ public class Veichle implements Movable {
         }
     }
 
+    /**
+     * checks so that the speed can only be changed in the interval 0-1
+     * 
+     * @param amount double parametre to change speed
+     * @return boolean that is True if within interval and False otherwise
+     */
     private boolean checkSpeedChange(double amount) {
         boolean check = false;
         if (amount <= 1 && amount >= 0) {

@@ -20,9 +20,9 @@ public class VeichleTest {
     @Test
     public void testSaab() {
         Veichle s = new Saab95();
-        assertEquals("125", s.getEnginePower());
+        assertEquals(125, s.getEnginePower());
         assertEquals(2, s.getNrDoors());
-        assertEquals("red", s.getColor());
+        assertEquals(Color.red, s.getColor());
         s.gas(1);
         double speed = s.getCurrentSpeed();
         s.brake(1);
@@ -42,16 +42,17 @@ public class VeichleTest {
         saab95.startEngine();
         assertEquals(saab95.getCurrentSpeed(), 0.1);
         saab95.move();
-        assertEquals(pos.x, 0.1);
+        saab95.move();
+        assertEquals(pos.x, 0.2);
         assertEquals(pos.y, zeroVector.y);
         saab95.gas(1); // 0.1 + 1.25*1 = 1.35
         assertEquals(saab95.getCurrentSpeed(), 1.35);
         saab95.move();
-        assertEquals(pos.x, 1.35);
-        saab95.brake(1); // 1.35 - 1.25*1 = 0.1
-        assertEquals(saab95.getCurrentSpeed(), 0.1);
+        assertEquals(pos.x, 1.55);
+        saab95.brake(1); // 1.35 - 1.25*1 = 1.1
+        assertEquals(Math.round(saab95.getCurrentSpeed()*1000)/1000.0, 0.1);
         saab95.move();
-        assertEquals(pos.x, 17.7);
+        assertEquals(Math.round(pos.x*1000)/1000.0, 1.65);
     }
 
     @Test

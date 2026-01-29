@@ -15,7 +15,7 @@ public class VeichleTest {
      * public void setUp(){
      * myVeichle = new Veichle(0, 0, null, null);
      * }
-    */
+     */
 
     @Test
     public void testSaab() {
@@ -23,15 +23,9 @@ public class VeichleTest {
         assertEquals("125", s.getEnginePower());
         assertEquals(2, s.getNrDoors());
         assertEquals("red", s.getColor());
-<<<<<<< HEAD
-        s.gas(2);
-        double speed = s.getCurrentSpeed();
-        s.gas(1);
-=======
         s.gas(1);
         double speed = s.getCurrentSpeed();
         s.brake(1);
->>>>>>> 3a10867e3ceb06f37ec851b3f8c3d3b6039b6d95
         assertTrue(speed > s.getCurrentSpeed());
         speed = s.getCurrentSpeed();
         s.gas(1);
@@ -50,21 +44,12 @@ public class VeichleTest {
         saab95.move();
         assertEquals(pos.x, 0.1);
         assertEquals(pos.y, zeroVector.y);
-<<<<<<< HEAD
-        saab95.gas(10); // 0.1 + 1.25*10 = 12.6
-        assertEquals(saab95.getCurrentSpeed(), 12.6);
-        saab95.move();
-        assertEquals(pos.x, 12.7);
-        saab95.gas(6.08); // 12.6 - 1.25*6.08 = 5
-        assertEquals(saab95.getCurrentSpeed(), 5);
-=======
         saab95.gas(1); // 0.1 + 1.25*1 = 1.35
         assertEquals(saab95.getCurrentSpeed(), 1.35);
         saab95.move();
         assertEquals(pos.x, 1.35);
         saab95.brake(1); // 1.35 - 1.25*1 = 0.1
         assertEquals(saab95.getCurrentSpeed(), 0.1);
->>>>>>> 3a10867e3ceb06f37ec851b3f8c3d3b6039b6d95
         saab95.move();
         assertEquals(pos.x, 17.7);
     }
@@ -89,7 +74,7 @@ public class VeichleTest {
 
     @Test
     public void activateTurbo() {
-        
+
     }
 
     @Test
@@ -100,13 +85,8 @@ public class VeichleTest {
         trim.startEngine();
         normalCar.startEngine();
 
-<<<<<<< HEAD
-        trim.gas(10);      // 0.1 + 1.25*10 = 12.6
-        normalCar.gas(10); // 0.1 + 1*10 = 10.1
-=======
         trim.gas(1); // 0.1 + 1.25*1 = 1,35
         normalCar.gas(1); // 0.1 + 1*1 = 1.1
->>>>>>> 3a10867e3ceb06f37ec851b3f8c3d3b6039b6d95
 
         assertNotEquals(trim.getCurrentSpeed(), normalCar.getCurrentSpeed());
 

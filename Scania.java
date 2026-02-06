@@ -1,6 +1,6 @@
 import java.awt.Color;
 
-public class Scania extends Veichle {
+public class Scania extends Truck {
 
     private int loadingAreaAngle;
 
@@ -17,6 +17,7 @@ public class Scania extends Veichle {
         if(angle <= 70 && angle >= 0){
             if(this.getCurrentSpeed() == 0){
                 loadingAreaAngle = angle;
+                this.setLoadingAreaDown(!this.getLoadingAreaDown());
             };
         };
         return;
@@ -24,7 +25,7 @@ public class Scania extends Veichle {
 
     @Override
     public void startEngine(){
-        if(loadingAreaAngle == 0){
+        if(getLoadingAreaDown()){
             super.startEngine();
         }
     } 

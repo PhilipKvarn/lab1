@@ -38,4 +38,31 @@ public class Vector2 {
         this.y = x*sin + y*cos;
         this.x = nextX;
     }
+
+    public static double VectorLength(Vector2 vec){
+        return Math.sqrt(vec.x*vec.x + vec.y * vec.y );
+    }
+
+    public double VectorLength(){
+        return Math.sqrt(this.x*this.x + this.y * this.y );
+    }
+
+    public static double VectorAngle(Vector2 vec1, Vector2 vec2){
+        double vl1_hyp = vec1.VectorLength();
+        double vl2_hyp = vec2.VectorLength();
+        double vl1_angle = Math.acos(vec1.x/vl1_hyp);  
+        double vl2_angle = Math.acos(vec2.x/vl2_hyp);  
+        return (vl2_angle - vl1_angle) % (Math.PI*2);
+    }
+    
+
+    public static double DotProduct(Vector2 vec1, Vector2 vec2){
+        double product = vec1.VectorLength()*vec2.VectorLength()*Math.cos(VectorAngle(vec1, vec2));
+        return product;
+    } 
+
+    public double DotProduct(Vector2 multVector){
+        double product = this.VectorLength()*multVector.VectorLength()*Math.cos(VectorAngle(this, multVector));
+        return product;
+    }
 }

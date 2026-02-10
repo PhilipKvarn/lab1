@@ -2,7 +2,7 @@ import java.awt.Color;
 
 public class Truck extends Veichle {
 
-    boolean loadingAreaDown;
+    protected boolean loadingAreaDown;
 
     public Truck(int nrDoors, double enginePower, Color color, String modelName){
         super(nrDoors, enginePower, color, modelName);
@@ -14,7 +14,9 @@ public class Truck extends Veichle {
     }
 
     public void setLoadingAreaDown(boolean loadingState){
-        loadingAreaDown = loadingState;
+        if (getCurrentSpeed() == 0) {       
+            loadingAreaDown = loadingState;     // Kan inte ändra loadingArea medans fordonet är i rörelse
+        }
         return;
     }
 

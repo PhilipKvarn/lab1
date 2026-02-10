@@ -1,14 +1,14 @@
 import java.util.Stack;
 
-public class veichleLoader {
-    Stack<Veichle> loadingStorage = new Stack<Veichle>();
+public class VeichleLoader<carType extends Veichle> {
+    Stack<carType> loadingStorage = new Stack<carType>();
     protected int maxCapacity;
 
-    public veichleLoader(int maxCap) {
+    public VeichleLoader(int maxCap) {
         maxCapacity = maxCap;
     }
 
-    public void LoadNewVeichle(Veichle veichle) {
+    public void LoadNewVeichle(carType veichle) {
         if (loadingStorage.capacity() != this.maxCapacity) {
             loadingStorage.addElement(veichle);
         }
@@ -16,9 +16,9 @@ public class veichleLoader {
         return;
     }
 
-    public void unloadVeichle() {
-        loadingStorage.pop();
-        return;
+    public carType unloadVeichle() {
+        carType unloadCar = loadingStorage.pop();
+        return unloadCar;
     }
 
     public int getMax() {

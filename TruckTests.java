@@ -22,4 +22,16 @@ public class TruckTests {
         s.stopEngine();
     }
 
+    @Test
+    public void testVeichleTransport(){
+        VeichleTransport v = new VeichleTransport(2, 120, Color.black, "sc", 4);
+        
+        Saab95 s = new Saab95();
+
+        v.LoadNewVeichle(v);
+        Veichle V = v.unloadVeichle();
+        assertEquals(V, null);
+
+    }
+
 }

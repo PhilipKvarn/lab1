@@ -13,19 +13,22 @@ public class VeichleTransport extends Truck {
     public void LoadNewVeichle(Veichle veichle) {
         if (veichle instanceof VeichleTransport) {
             return;
-        }
-        if (Math.abs(veichle.getPosition().x) - Math.abs(getPosition().x) <= 1 &&
+        } else{
+            if (Math.abs(veichle.getPosition().x) - Math.abs(getPosition().x) <= 1 &&
                 Math.abs(veichle.getPosition().y) - Math.abs(getPosition().y) <= 1) {
             parentLoader.LoadNewVeichle(veichle);
-        } else {
-            // Handle veichle too far away to load
+            } else {
+                // Handle veichle too far away to load
+            }
         }
         return;
     }
 
     public Veichle unloadVeichle() {
         Veichle unloaded_car = parentLoader.unloadVeichle();
-        unloaded_car.setPosition(Vector2.add(getPosition(), -1, -1));
+        if (unloaded_car != null) {
+            unloaded_car.setPosition(Vector2.add(getPosition(), -1, -1));   
+        }
         return unloaded_car;
     }
 

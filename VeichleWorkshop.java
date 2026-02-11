@@ -1,13 +1,17 @@
-public class VeichleWorkshop<veichletype extends Veichle> {
+public class VeichleWorkshop<VeichleType extends Veichle> {
 
-    VeichleLoader<veichletype> loadedCars;
+    VeichleLoader<VeichleType> loadedCars;
 
     public VeichleWorkshop(int maxCapacity) {
         this.loadedCars = new VeichleLoader<>(maxCapacity);
     }
 
-    public void loadCar(Veichle car) {
+    public void loadCar(VeichleType car) {
         this.loadedCars.LoadNewVeichle(car);
     }
 
+    public VeichleType unloadCar(){
+        VeichleType unloaded_car = loadedCars.unloadVeichle();
+        return unloaded_car;
+    } 
 }

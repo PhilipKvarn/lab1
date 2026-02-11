@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;;
 
 public class VeichleLoader<carType extends Veichle> {
-    
+
     ArrayList<carType> loadingStorage = new ArrayList<>();
 
     protected int maxCapacity;

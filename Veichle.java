@@ -197,6 +197,16 @@ public class Veichle implements Movable {
      * 
      * @return a Vector2 type of this object position
      */
+    public void setPosition(Vector2 newPosition) {
+        veichlePosition = newPosition;
+        return;
+    }
+
+    /**
+     * returns a Vector2 representing the position of this object
+     * 
+     * @return a Vector2 type of this object position
+     */
     public Vector2 getPosition() {
         return veichlePosition;
     }

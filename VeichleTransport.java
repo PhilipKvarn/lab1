@@ -3,7 +3,6 @@ import java.util.Stack;
 
 public class VeichleTransport extends Truck {
 
-    Stack<Veichle> loadingStorage = new Stack<Veichle>();
     VeichleLoader<Veichle> parentLoader = new VeichleLoader<>(4);
 
     public VeichleTransport(int nrDoors, double enginePower, Color color, String modelName){
@@ -15,13 +14,13 @@ public class VeichleTransport extends Truck {
         if (veichle instanceof VeichleTransport) {
             return;
         }
-        loadingStorage.addElement(veichle);
+        parentLoader.LoadNewVeichle(veichle);
         return;
     }
 
-    public void unloadVeichle(){
-        loadingStorage.pop();
-        return;
+    public Veichle unloadVeichle(){
+        Veichle unloaded_car = parentLoader.unloadVeichle();
+        return unloaded_car;
     }
 
     @Override

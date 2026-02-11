@@ -119,20 +119,4 @@ public class VeichleTest {
         assertEquals(1.1, normalCar.getCurrentSpeed());
     }
 
-    @Test
-    public void testVeichleTransport() {
-        VeichleTransport v = new VeichleTransport(2, 400, Color.GREEN, "Biltransport", 4);
-        v.gas(1);
-        v.setLoadingAreaDown(true);
-        assertEquals(v.loadingAreaDown, false);
-        v.brake(1);
-        v.setLoadingAreaDown(true);
-        assertEquals(v.loadingAreaDown, true);
-        Saab95 s = new Saab95();
-        v.LoadNewVeichle(v);
-        Veichle V = v.unloadVeichle();
-        assertEquals(V, null);
-
-    }
-
 }

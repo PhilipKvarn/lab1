@@ -9,7 +9,7 @@ public class VeichleLoader<carType extends Veichle> {
     }
 
     public void LoadNewVeichle(carType veichle) {
-        if (loadingStorage.capacity() != this.maxCapacity) {
+        if (loadingStorage.capacity() < this.maxCapacity) {
             loadingStorage.addElement(veichle);
         }
 

@@ -21,9 +21,13 @@ public class VeichleLoader<carType extends Veichle> {
     }
 
     public carType unloadVeichle() {
-        carType unloadCar = loadingStorage.getLast();
-        loadingStorage.removeLast();
-        return unloadCar;
+        if(loadingStorage.isEmpty()){
+            return null;
+        } else {
+            carType unloadCar = loadingStorage.getLast();
+            loadingStorage.removeLast();
+            return unloadCar;
+        }
     }
 
     public void forEachItem(Consumer<carType> func){

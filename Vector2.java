@@ -20,6 +20,17 @@ public class Vector2 {
      * @param x Value to be added to the x-axis of this vector
      * @param y Value to be added to the y-axis of this vector
      */
+    static public Vector2 add(Vector2 v, double x, double y){
+        v.x += x;
+        v.y += y;
+        return v;
+    }
+
+    /***
+     * Adds two doubles onto the vector, one for the x-axis and one for the y-axis
+     * @param x Value to be added to the x-axis of this vector
+     * @param y Value to be added to the y-axis of this vector
+     */
     public void add(double x, double y){
         this.x += x;
         this.y += y;

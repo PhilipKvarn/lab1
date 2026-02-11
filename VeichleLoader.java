@@ -1,5 +1,6 @@
 
-import java.util.Vector;;
+import java.util.Vector;
+import java.util.function.Consumer;;
 
 public class VeichleLoader<carType extends Veichle> {
     
@@ -23,6 +24,12 @@ public class VeichleLoader<carType extends Veichle> {
         carType unloadCar = loadingStorage.getLast();
         loadingStorage.removeLast();
         return unloadCar;
+    }
+
+    public void forEachItem(Consumer<carType> func){
+        for (carType car : loadingStorage){
+            func.accept(car);
+        }
     }
 
     public int getMax() {

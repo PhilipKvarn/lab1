@@ -40,7 +40,7 @@ public class VeichleTransport extends Truck {
      */
     public void move() {
         super.move();
-        parentLoader.forEachItem(loadedCar -> loadedCar.setPosition(this.getPosition()) );
+        parentLoader.forEachItem(loadedCar -> loadedCar.setPosition(this.getPosition()));
     }
 
     @Override

@@ -1,10 +1,10 @@
 
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.function.Consumer;;
 
 public class VeichleLoader<carType extends Veichle> {
     
-    Vector<carType> loadingStorage = new Vector<>();
+    ArrayList<carType> loadingStorage = new ArrayList<>();
 
     protected int maxCapacity;
 
@@ -13,8 +13,8 @@ public class VeichleLoader<carType extends Veichle> {
     }
 
     public void LoadNewVeichle(carType veichle) {
-        if (loadingStorage.capacity() < this.maxCapacity) {
-            loadingStorage.addElement(veichle);
+        if (loadingStorage.size() < this.maxCapacity) {
+            loadingStorage.add(veichle);
         }
 
         return;
@@ -37,6 +37,6 @@ public class VeichleLoader<carType extends Veichle> {
     }
 
     public int getCapacity() {
-        return loadingStorage.capacity();
+        return loadingStorage.size();
     }
 }

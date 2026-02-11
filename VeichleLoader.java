@@ -3,7 +3,7 @@ import java.util.ArrayList;
 import java.util.function.Consumer;;
 
 public class VeichleLoader<carType extends Veichle> {
-    
+
     ArrayList<carType> loadingStorage = new ArrayList<>();
 
     protected int maxCapacity;
@@ -21,13 +21,19 @@ public class VeichleLoader<carType extends Veichle> {
     }
 
     public carType unloadVeichle() {
-        carType unloadCar = loadingStorage.getLast();
-        loadingStorage.removeLast();
-        return unloadCar;
+        if(loadingStorage.isEmpty()){
+            return null;
+        }
+        else{
+            carType unloadCar = loadingStorage.getLast();
+            loadingStorage.removeLast();
+            return unloadCar; 
+        }
+        
     }
 
-    public void forEachItem(Consumer<carType> func){
-        for (carType car : loadingStorage){
+    public void forEachItem(Consumer<carType> func) {
+        for (carType car : loadingStorage) {
             func.accept(car);
         }
     }

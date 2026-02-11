@@ -50,9 +50,9 @@ public class VeichleTest {
         saab95.move();
         assertEquals(pos.x, 1.55);
         saab95.brake(1); // 1.35 - 1.25*1 = 1.1
-        assertEquals(Math.round(saab95.getCurrentSpeed()*1000)/1000.0, 0.1);
+        assertEquals(Math.round(saab95.getCurrentSpeed() * 1000) / 1000.0, 0.1);
         saab95.move();
-        assertEquals(Math.round(pos.x*1000)/1000.0, 1.65);
+        assertEquals(Math.round(pos.x * 1000) / 1000.0, 1.65);
     }
 
     @Test
@@ -96,27 +96,43 @@ public class VeichleTest {
     }
 
     @Test
-    public void ensureGas(){
-        Veichle normalCar = new Veichle(2, 100,Color.red,"ABC123");
+    public void ensureGas() {
+        Veichle normalCar = new Veichle(2, 100, Color.red, "ABC123");
         normalCar.startEngine(); // speed --> 0.1
-        normalCar.gas(-10);      // speed --> 0.1
+        normalCar.gas(-10); // speed --> 0.1
         normalCar.gas(1); // speed --> 1.1
         assertEquals(1.1, normalCar.getCurrentSpeed());
         normalCar.gas(100); // speed --> 1.1
-        normalCar.gas(1);   // speed --> 2.1
+        normalCar.gas(1); // speed --> 2.1
         assertEquals(2.1, normalCar.getCurrentSpeed());
     }
 
     @Test
-    public void ensureBrake(){
-        Veichle normalCar = new Veichle(2, 100,Color.red,"ABC123");
+    public void ensureBrake() {
+        Veichle normalCar = new Veichle(2, 100, Color.red, "ABC123");
         normalCar.startEngine();
         normalCar.gas(1); // speed --> 1.1
         normalCar.gas(1); // speed --> 2.2
-        normalCar.brake(-5);     // speed --> 2.2
+        normalCar.brake(-5); // speed --> 2.2
         normalCar.brake(100); // speed --> 2.2
-        normalCar.brake(1);   // speed --> 1.1
+        normalCar.brake(1); // speed --> 1.1
         assertEquals(1.1, normalCar.getCurrentSpeed());
+    }
+
+    @Test
+    public void testVeichleTransport() {
+        VeichleTransport v = new VeichleTransport(2, 400, Color.GREEN, "Biltransport", 4);
+        v.gas(1);
+        v.setLoadingAreaDown(true);
+        assertEquals(v.loadingAreaDown, false);
+        v.brake(1);
+        v.setLoadingAreaDown(true);
+        assertEquals(v.loadingAreaDown, true);
+        Saab95 s = new Saab95();
+        v.LoadNewVeichle(v);
+        Veichle V = v.unloadVeichle();
+        assertEquals(V, null);
+
     }
 
 }

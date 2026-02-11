@@ -2,32 +2,30 @@ import java.awt.Color;
 
 public class VeichleTransport extends Truck {
 
-    VeichleLoader<Veichle> parentLoader = new VeichleLoader<>(4);
+    VeichleLoader<Veichle> parentLoader;
 
-    public VeichleTransport(int nrDoors, double enginePower, Color color, String modelName){
-        super(nrDoors,enginePower,color,modelName);
+    public VeichleTransport(int nrDoors, double enginePower, Color color, String modelName, int maxCapacity) {
+        super(nrDoors, enginePower, color, modelName);
         setLoadingAreaDown(false);
+        parentLoader = new VeichleLoader<>(maxCapacity);
     }
 
-    public void LoadNewVeichle(Veichle veichle){
+    public void LoadNewVeichle(Veichle veichle) {
         if (veichle instanceof VeichleTransport) {
             return;
         }
-        if (
-            Math.abs(veichle.getPosition().x) - Math.abs(getPosition().x) <= 1 && 
-            Math.abs(veichle.getPosition().y) - Math.abs(getPosition().y) <= 1  
-            ) 
-            {
-            parentLoader.LoadNewVeichle(veichle);   
+        if (Math.abs(veichle.getPosition().x) - Math.abs(getPosition().x) <= 1 &&
+                Math.abs(veichle.getPosition().y) - Math.abs(getPosition().y) <= 1) {
+            parentLoader.LoadNewVeichle(veichle);
         } else {
             // Handle veichle too far away to load
         }
         return;
     }
 
-    public Veichle unloadVeichle(){
+    public Veichle unloadVeichle() {
         Veichle unloaded_car = parentLoader.unloadVeichle();
-        unloaded_car.setPosition(Vector2.add(getPosition(),-1,-1));
+        unloaded_car.setPosition(Vector2.add(getPosition(), -1, -1));
         return unloaded_car;
     }
 
@@ -44,8 +42,8 @@ public class VeichleTransport extends Truck {
     }
 
     @Override
-    public void startEngine(){
-        if(!loadingAreaDown){
+    public void startEngine() {
+        if (!loadingAreaDown) {
             super.startEngine();
         }
     }
